@@ -1,0 +1,223 @@
+SELECT `date`, (SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) AS fullName FROM `st` WHERE fullName = '" + memberName + "', " +
+                "`room_id`, `time_in`, `time_out`, ABS(`time_out` - `time_in`) AS duration FROM `st` WHERE `time_out` IS NOT NULL AND `date` = CURRENT_DATE()
+
+ Иван Иванов Иванович
+ Вася Пупкин Иванович
+
+запрос для получения маршрута выбранного сотрудника. старый и работающий
+SELECT `date`, 
+	CONCAT(`fName`, ' ', `sName`, ' ', `tName`) AS name, 
+    `room`, 
+    `time_in`, `time_out`, 
+    ABS(`time_out` - `time_in`) AS duration 
+FROM `st`, `members`, `rooms`
+WHERE `time_out` IS NOT NULL 
+AND `date` = CURRENT_DATE() - 1
+AND CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND room_id = rooms.id
+
+
+
+UPDATE `st` SET `time_out` = CURRENT_TIME() WHERE `member_id` = (SELECT id FROM `members` WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович') ORDER BY `id` DESC LIMIT 1;
+
+INSERT INTO `st` (`id`, `member_id`, `room_id`, `date`, `time_in`, `time_out`) 
+VALUES (NULL, 
+        (SELECT id FROM `members` WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович'), 
+        (SELECT id FROM `rooms` WHERE `room` = '[ВНЕ РАБОЧЕЙ ЗОНЫ]'),
+        CURRENT_DATE(), 
+        CURRENT_TIME(), 
+        NULL);
+
+//обновлённый запрос для маршрута. Тоже работает
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+	CONCAT(`fName`, ' ', `sName`, ' ', `tName`) AS name, 
+    `room`, 
+    `time_in`, `time_out`, 
+    TIMEDIFF(`time_out`, `time_in`) AS duration 
+FROM `st`, `members`, `rooms`
+WHERE `time_out` IS NOT NULL 
+AND `date` = CURRENT_DATE() - 1
+AND CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND room_id = rooms.id
+
+
+SELECT `room`,  
+    SUM(MINUTE (TIMEDIFF (`time_out`, `time_in`))) AS totalDuration_minutes 
+FROM `st`, `members`, `rooms`
+WHERE `time_out` IS NOT NULL 
+AND `date` = CURRENT_DATE() - 1
+AND CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND room_id = rooms.id
+GROUP BY `room`
+
+
+SELECT `date`, 
+	(SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+     		WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович') AS name,
+	(SELECT `room` FROM `rooms` 
+     		WHERE rooms.id = st.room_id) AS room,
+	`time_in`, `time_out`,
+     TIMEDIFF(`time_out`, `time_in`) AS duration
+FROM `st` 
+inner join `members` AS m 
+where CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = m.id
+AND `time_out` IS NOT NULL
+#AND st.date = CURRENT_DATE() - 1
+
+
+
+
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+	CONCAT(`fName`, ' ', `sName`, ' ', `tName`) AS name, 
+    (SELECT `room` FROM `rooms` WHERE 
+     	(SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+         	WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович')) as room, 
+     `time_in`, `time_out`, 
+     TIMEDIFF(`time_out`, `time_in`) AS duration 
+     FROM `st`, `members`, `rooms` 
+     WHERE `time_out` IS NOT NULL 
+     AND `date` = CURRENT_DATE() - 1 
+     AND CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+     AND room_id = (SELECT `room` FROM `rooms` WHERE (SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+		WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович'))
+
+
+
+
+
+
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+	CONCAT(`fName`, ' ', `sName`, ' ', `tName`) AS name, 
+    `room`,  
+     `time_in`, `time_out`, 
+     TIMEDIFF(`time_out`, `time_in`) AS duration 
+     FROM `st`, `members`, `rooms`
+     WHERE `time_out` IS NOT NULL
+     AND rooms.id = `room_id`
+     AND `date` = CURRENT_DATE() - 1 
+     AND CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+
+
+
+SELECT * FROM `st` 
+inner join `members` 
+where CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = members.id
+AND `time_out` IS NOT NULL
+
+
+SELECT `date`, 
+	(SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+     		WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович') AS name,
+	(SELECT `room` FROM `rooms` 
+     		WHERE rooms.id = st.room_id) AS room,
+	`time_in`, `time_out`,
+     TIMEDIFF(`time_out`, `time_in`) AS duration
+FROM `st` 
+INNER JOIN `members` AS m 
+WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = m.id
+AND `time_out` IS NOT NULL
+#AND st.date = CURRENT_DATE() - 1
+
+
+
+============================================================================================================== для маршрута сотрудника
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+	(SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+     		WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович') AS name,
+	(SELECT `room` FROM `rooms` WHERE rooms.id = st.room_id) AS room,
+	`time_in`, `time_out`,
+     TIMEDIFF(`time_out`, `time_in`) AS duration
+FROM `st` 
+INNER JOIN `members` AS m 
+WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = m.id
+AND `time_out` IS NOT NULL
+#AND st.date = CURRENT_DATE() - 1
+=============================================+++++++++++++++++++++++++++++++____________________________________
+
+
+
+
+
+
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+    (SELECT `room` FROM `rooms` 
+            WHERE rooms.id = st.room_id) AS room,
+     CASE WHEN `time_in` < `time_out` THEN
+        TIMEDIFF(`time_out`, `time_in`)
+     ELSE 
+        DATE_ADD(`time_out`, INTERVAL -1 DAY) + `time_in` END AS duration
+
+FROM `st` 
+INNER JOIN `members` AS m 
+WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = m.id
+AND `time_out` IS NOT NULL
+AND st.date = CURRENT_DATE() - 2
+
+
+
+
+
+
+SELECT DATE_FORMAT(`date`, '%d.%m.%Y') AS date, 
+    (SELECT `room` FROM `rooms` 
+            WHERE rooms.id = st.room_id) AS room,
+     CASE WHEN `time_in` < `time_out` THEN
+        TIMEDIFF(`time_out`, `time_in`)
+     ELSE 
+        DATE_ADD(TIMEDIFF(`time_out`, `time_in`), INTERVAL 1 DAY) END AS duration
+
+FROM `st` 
+INNER JOIN `members` AS m 
+WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+AND st.member_id = m.id
+AND `time_out` IS NOT NULL
+AND st.date = CURRENT_DATE() - 2
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////для помещений
+SELECT `room`, SEC_TO_TIME(SUM(duration_inSEC)) AS duration FROM 
+    (SELECT (SELECT `room` FROM `rooms` WHERE rooms.id = st.room_id) AS room,
+             CASE WHEN `time_in` < `time_out` THEN
+                TIMESTAMPDIFF(second, `time_in`, `time_out`)
+             ELSE 
+                86400 + TIMESTAMPDIFF(second, `time_in`, `time_out`) END AS duration_inSEC
+        FROM `st` 
+        INNER JOIN `members` AS m 
+        WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+        AND st.member_id = m.id
+        AND `time_out` IS NOT NULL
+        AND WEEK(st.date) = WEEK(CURRENT_DATE())) as secc
+GROUP BY secc.room
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+######################################################################################################### для переработки
+SELECT (SELECT CONCAT(`fName`, ' ', `sName`, ' ', `tName`) FROM `members` 
+        	WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович') AS fullName, 
+        28800 AS plan, 
+        SUM(duration_inSEC) AS fact,
+        (SUM(duration_inSEC) - 28800) AS overtime_inSEC FROM 
+        (SELECT (SELECT `room` FROM `rooms` WHERE rooms.id = st.room_id ) AS room, 
+         	CASE WHEN `time_in` < `time_out` THEN 
+         		TIMESTAMPDIFF(second, `time_in`, `time_out`) 
+         	ELSE 
+         		86400 + TIMESTAMPDIFF(second, `time_in`, `time_out`) END AS duration_inSEC
+         FROM `st` 
+         INNER JOIN `members` AS m 
+         WHERE CONCAT(`fName`, ' ', `sName`, ' ', `tName`) = 'Вася Пупкин Иванович' 
+         AND st.member_id = m.id
+         AND st.room_id <> 2
+         AND `time_out` IS NOT NULL
+         AND WEEK(st.date) = WEEK(CURRENT_DATE()) ) as secc
+GROUP BY `fullName`
+##########################################################################################################
