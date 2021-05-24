@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Client
 {
     public partial class MainWindow : Form
     {

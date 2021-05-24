@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Client
 {
-    static class Program
+    static class ClientProgram
     {
         /// <summary>
         /// Главная точка входа для приложения.
