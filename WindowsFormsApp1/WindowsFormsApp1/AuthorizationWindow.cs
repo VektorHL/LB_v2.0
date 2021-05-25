@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient; //для работы клиента с сервером
 using Npgsql;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +22,8 @@ namespace Client
 
         MySqlDataAdapter adapter = new MySqlDataAdapter();
 
+        System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+
         //конструктор для окна авторизации
         public AuthorizationWindow()
         {
@@ -34,6 +38,8 @@ namespace Client
 
             //скрывает символы пароля
             this.PasswordInput_textBox.UseSystemPasswordChar = true;
+
+            clientSocket.Connect("127.0.0.1", 8888);
         }
 
         private void AuthorizationWindow_Load(object sender, EventArgs e)
@@ -59,37 +65,38 @@ namespace Client
         {
             String userPassword = PasswordInput_textBox.Text;
             String userLogin = login_textBox.Text;
+
+
+
             /*
              * ничего не делает, если: 
              *      1)поле после попытки ввода пароля осталось пустым (мигающий курсор в нём, но оно пустое; будет красная надпись)
              *      2)попытки ввода пароля не было (есть серая надпись "Введите пароль", она только сразу после запуска программы такая)
             */
-            if (PasswordInput_textBox.Text != "" && PasswordInput_textBox.Text != "Введите пароль")
+            if (PasswordInput_textBox.Text != "" && PasswordInput_textBox.Text != "Введите пароль" && PasswordInput_textBox.Text != "")
             {          
-                //DB db = new DB();
+                //MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
 
-                //DataTable table = new DataTable();
+                //command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
+                //command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
 
-                //MySqlDataAdapter adapter = new MySqlDataAdapter();
+                //adapter.SelectCommand = command;
+                //adapter.Fill(table);
 
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
 
-                command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
-                command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
-
-                adapter.SelectCommand = command;
-                adapter.Fill(table);
                 
                 
                 //если пароль введён правильно, это окно больше не нужно. поэтому оно закроется и откроет основное
-                if (table.Rows.Count > 0)
+                if (/*table.Rows.Count > 0*/ true)
                 {
-                    //MessageBox.Show("HURRAY!");
+                    ////MessageBox.Show("HURRAY!");
 
-                    this.Hide();// убираем окно регистрации
+                    //this.Hide();// убираем окно регистрации
 
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();// открываем основное окно                  
+                    //MainWindow mainWindow = new MainWindow();
+                    //mainWindow.Show();// открываем основное окно
+
+                    MessageBox.Show("It works!!");
                 }
                 else
                 {
@@ -144,5 +151,8 @@ namespace Client
                 login_textBox.ForeColor = Color.Red;
             }
         }
+
+
+
     }
 }
