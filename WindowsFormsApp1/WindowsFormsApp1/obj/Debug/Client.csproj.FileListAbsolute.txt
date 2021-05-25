@@ -45,7 +45,6 @@ S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debu
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\System.Threading.Channels.xml
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\System.Threading.Tasks.Extensions.xml
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\System.ValueTuple.xml
-S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.csprojAssemblyReference.cache
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.config
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.csproj.GenerateResource.cache
@@ -58,3 +57,6 @@ S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debu
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.MemberWayWindow.resources
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.OvertimeWindow.resources
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.RoomStatWindow.resources
+S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Objects.dll
+S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Objects.pdb
+S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Client.csproj.AssemblyReference.cache

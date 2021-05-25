@@ -3,11 +3,19 @@ using MySql.Data.MySqlClient; //для работы клиента с серве
 //using Npgsql;
 //using System.Net;
 //using System.Net.Sockets;
-//using System.Data;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Sockets;
+using System.ComponentModel;
+using System.Drawing;
+using WindowsFormsApp1;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Security.Permissions;
 
 namespace Server
 {

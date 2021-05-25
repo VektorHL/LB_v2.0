@@ -1,120 +1,97 @@
 ﻿using MySql.Data.MySqlClient; //для работы клиента с сервером
 //using Npgsql;
 using System;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WindowsFormsApp1;
+using System.Runtime.Serialization.Formatters.Binary;
+using Objects;
 using System.Threading;
+using System.Security.Permissions;
+using Client;
 
 namespace Server
 {
     class ServerProgram
     {
-
+        //static ServerObject server; // сервер
+        //static Thread listenThread; // потока для прослушивания
 
         static void Main(string[] args)
         {
-            serverDB db = new serverDB();
-            
+
+            //serverDB dB = new serverDB();
+
+            DB db = new DB();
+
+            DataTable dataTable = new DataTable();
+
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-
-            TcpListener serverSocket = new TcpListener(8888);            
-            //int requestCount = 0;            
-            TcpClient clientSocket = default(TcpClient);
-            serverSocket.Start();
-            //Console.WriteLine(" >> Server Started");           
-            clientSocket = serverSocket.AcceptTcpClient();            
-            //Console.WriteLine(" >> Accept connection from client");            
-            //requestCount = 0;
-
-
-            while ((true))
-            {
-                try
-                {
-                    //requestCount = requestCount + 1;
-                    
-                    NetworkStream networkStream = clientSocket.GetStream();
-                   
-                    byte[] bytesFrom = new byte[10025];
-                    
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    
-                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                    
-                    Console.WriteLine(" >> Data from client - " + dataFromClient);
-                    
-                    string serverResponse = "Last Message from client" + dataFromClient;
-                    
-                    Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
-                    
-                    networkStream.Write(sendBytes, 0, sendBytes.Length);
-                    networkStream.Flush();
-                    
-                    Console.WriteLine(" >> " + serverResponse);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-
-
-            // получаем адреса для запуска сокета
-            //IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), localPort);
-
-            //// создаем сокет
-            //Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //try
             //{
-            //    // связываем сокет с локальной точкой, по которой будем принимать данные
-            //    listenSocket.Bind(ipPoint);
-
-            //    // начинаем прослушивание
-            //    listenSocket.Listen(10);
-
-            //    Console.WriteLine("Сервер запущен. Ожидание подключений...");
-
-            //    while (true)
-            //    {
-            //        Socket handler = listenSocket.Accept();
-
-            //        // получаем сообщение
-            //        StringBuilder builder = new StringBuilder();
-            //        int bytes = 0; // количество полученных байтов
-            //        byte[] data = new byte[256]; // буфер для получаемых данных
-
-            //        do
-            //        {
-            //            bytes = handler.Receive(data);
-            //            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-            //        }
-            //        while (handler.Available > 0);
-
-            //        Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
-
-            //        // отправляем ответ
-            //        string message = "ваше сообщение доставлено";
-            //        data = Encoding.Unicode.GetBytes(message);
-            //        handler.Send(data);
-            //        // закрываем сокет
-            //        handler.Shutdown(SocketShutdown.Both);
-            //        handler.Close();
-            //    }
+            //    server = new ServerObject();
+            //    listenThread = new Thread(new ThreadStart(server.Listen));
+            //    listenThread.Start(); //старт потока
             //}
             //catch (Exception ex)
             //{
+            //    server.Disconnect();
             //    Console.WriteLine(ex.Message);
             //}
 
+            Console.WriteLine("asd");
 
+            //MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
+
+            MySqlCommand command = new MySqlCommand("SELECT id FROM `users`", db.getConnection());
+
+            //command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
+            //command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
+
+
+            adapter.SelectCommand = command;
+
+            Console.WriteLine("asd");
+            table = new DataTable();
+
+            adapter.Fill(table);
+
+            Console.WriteLine("asd");
+
+            if (table.Rows.Count > 0)
+            {
+                ////MessageBox.Show("HURRAY!");
+
+                //this.Hide();// убираем окно регистрации
+
+                //MainWindow mainWindow = new MainWindow();
+                //mainWindow.Show();// открываем основное окно
+
+                Console.WriteLine("asd");
+            }
+            else
+            {
+                Console.WriteLine("assd");
+            }
 
         }
     }
+
+
+
+    
 }
+
+
+//System.IO.FileNotFoundException: 'Could not load file or assembly 'System.Security.Permissions, Version = 0.0.0.0, Culture = neutral, PublicKeyToken = cc7b13ffcd2ddd51'. 
+//    Не удается найти указанный файл.'

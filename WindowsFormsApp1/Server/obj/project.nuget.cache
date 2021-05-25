@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OvjilPVhwy7HEKDuvRKC5eC2X5IrQfPUbphTpb74uxqBkH9lprAHrPOhM2Z+5DrS6ynaIjmYvNxyRUWCP4UkBQ==",
+  "dgSpecHash": "V9XY2sPnAAxTD3+WQUeWwwUp+wQbai+P2HbGwstAXIAeId+8gbHr69/aNmm5hs9y490twvTI4a0t01bvgOk+6w==",
   "success": true,
   "projectFilePath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\IVAN\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.14\\microsoft.netcore.app.host.win-x64.3.1.14.nupkg.sha512"
+  ],
   "logs": []
 }

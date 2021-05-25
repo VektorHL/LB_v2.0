@@ -4,6 +4,16 @@
     "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj": {}
   },
   "projects": {
+    "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj": {
+      "restore": {
+        "projectUniqueName": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj",
+        "projectName": "Objects",
+        "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj"
+      },
+      "frameworks": {
+        "net471": {}
+      }
+    },
     "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -23,16 +33,23 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {}
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj": {
+                "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj"
+              },
+              "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj": {
+                "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -42,8 +59,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -54,13 +71,38 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.14, 3.1.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200-preview.21077.7\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21258.4\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj": {
+      "restore": {
+        "projectUniqueName": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj",
+        "projectName": "Client",
+        "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj",
+        "frameworks": {
+          "net471": {
+            "projectReferences": {
+              "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj": {
+                "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net471": {}
       }
     }
   }

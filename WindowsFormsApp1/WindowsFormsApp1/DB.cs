@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class DB
+    public class DB
     {
         //переменная с данными о серваке и БД
         MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=littlebrother");
