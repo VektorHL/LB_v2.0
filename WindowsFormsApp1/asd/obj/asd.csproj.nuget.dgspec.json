@@ -1,25 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj": {}
+    "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj": {}
   },
   "projects": {
-    "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj": {
+    "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj",
+        "projectUniqueName": "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj",
         "projectName": "asd",
-        "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj",
-        "packagesPath": "C:\\Users\\IVAN\\.nuget\\packages\\",
-        "outputPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\obj\\",
+        "projectPath": "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\asd.csproj",
+        "packagesPath": "C:\\Users\\Motherfucker\\.nuget\\packages\\",
+        "outputPath": "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\asd\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\IVAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Motherfucker\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +39,20 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Security.Permissions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -54,18 +63,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.14, 3.1.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21258.4\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

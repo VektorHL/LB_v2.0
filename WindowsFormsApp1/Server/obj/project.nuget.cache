@@ -1,10 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "V9XY2sPnAAxTD3+WQUeWwwUp+wQbai+P2HbGwstAXIAeId+8gbHr69/aNmm5hs9y490twvTI4a0t01bvgOk+6w==",
+  "dgSpecHash": "GCpSf+pI6F9jiiL9u9VUnhdMT/fZoDqGEjlPQpKfsQ5yFjwiLg9ncOl7v2K1t6w/8aNMqAFxr7KD+PwU/q1nnA==",
   "success": true,
-  "projectFilePath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj",
+  "projectFilePath": "C:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\IVAN\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.14\\microsoft.netcore.app.host.win-x64.3.1.14.nupkg.sha512"
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.management\\5.0.0\\system.management.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\Motherfucker\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

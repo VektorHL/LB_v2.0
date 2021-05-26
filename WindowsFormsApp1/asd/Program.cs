@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
-//using System.Security.Permissions;
+using System.Security.Permissions;
 
 namespace asd
 {
@@ -24,12 +24,18 @@ namespace asd
             MySqlDataAdapter adaptert = new MySqlDataAdapter();
 
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = 123 AND `password` = 123", dbd.getConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = 'test' AND `password` = 123", dbd.getConnection());
 
             adaptert.SelectCommand = command;
             adaptert.Fill(tablet);
 
+            if (tablet.Rows.Count > 0)
+            {
+                Console.WriteLine("asdasdasdasdasdasdasdasdasd");
+            }
+
             Console.WriteLine("Hello World!");
+            Console.ReadKey();
         }
     }
 }

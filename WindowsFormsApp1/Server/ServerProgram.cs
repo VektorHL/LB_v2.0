@@ -53,7 +53,7 @@ namespace Server
 
             //MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
 
-            MySqlCommand command = new MySqlCommand("SELECT id FROM `users`", db.getConnection());
+            MySqlCommand command = new MySqlCommand("SELECT id FROM `users` ", db.getConnection());
 
             //command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
             //command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
@@ -77,7 +77,7 @@ namespace Server
                 //MainWindow mainWindow = new MainWindow();
                 //mainWindow.Show();// открываем основное окно
 
-                Console.WriteLine("asd");
+                Console.WriteLine("ты не пидор");
             }
             else
             {
