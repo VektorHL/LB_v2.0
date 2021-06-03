@@ -96,15 +96,54 @@ namespace Server
                             }
                             break;
                         
-                        case "asd":
-                            Console.WriteLine("login asd");
+                        case "Add Movement":
+                            Console.WriteLine("oper type - Add Movement");
+                            //List<string[]> data = new List<string[]>();
+                            
+                            //if (IsClientConnected(client))
+                            //{
+                            //    SetDataForAnswer(message, data);
+                            //}
+                            //formatter.Serialize(strm, data);
+
                             break;
 
-                        case "qwe":
+                        case "Get Memb Way":
+                            Console.WriteLine("oper type - Get Memb Way");
+                            //List<string[]> data = new List<string[]>();
+
+                            //if (IsClientConnected(client))
+                            //{
+                            //    SetDataForAnswer(message, data);
+                            //}
+                            //formatter.Serialize(strm, data);
 
                             break;
 
-                        
+                        case "Get Overtime Stat":
+                            Console.WriteLine("oper type - Get Overtime Stat");
+                            //List<string[]> data = new List<string[]>();
+
+                            //if (IsClientConnected(client))
+                            //{
+                            //    SetDataForAnswer(message, data);
+                            //}
+                            //formatter.Serialize(strm, data);
+
+                            break;
+
+                        case "Get Room Stat":
+                            Console.WriteLine("oper type - Get Room Stat");
+                            //List<string[]> data = new List<string[]>();
+
+                            //if (IsClientConnected(client))
+                            //{
+                            //    SetDataForAnswer(message, data);
+                            //}
+                            //formatter.Serialize(strm, data);
+
+                            break;
+
                     }
                 }
                 catch(Exception ex) 

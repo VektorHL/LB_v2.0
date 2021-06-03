@@ -106,7 +106,10 @@ namespace Client
                 //если пароль введён правильно, это окно больше не нужно. поэтому оно закроется и откроет основное
                 if (answer == "yes")
                 {
-   
+                    this.Hide();
+
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
                     //table = new DataTable();
 
                     MessageBox.Show("It works!!");
