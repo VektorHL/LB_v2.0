@@ -12,9 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Objects;
 using System.Threading;
+using System.IO;
 
 namespace Client
 {
@@ -26,18 +28,14 @@ namespace Client
 
         MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-        static string userName;
+
+
+        //static string userName;
         private const string host = "127.0.0.1";
         private const int port = 8888;
-        static TcpClient client;
-        static NetworkStream stream;
-        private BinaryFormatter _bFormatter;
-        private int _port;
-        private TcpClient _tcpClient;
-        private Thread _listenThread;
-        private bool _running;
 
-        //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+        public static TcpClient clientSocket = new TcpClient(host, port);
+        NetworkStream serverStream = clientSocket.GetStream();
 
         //конструктор для окна авторизации
         public AuthorizationWindow()
@@ -54,14 +52,12 @@ namespace Client
             //скрывает символы пароля
             this.PasswordInput_textBox.UseSystemPasswordChar = true;
 
-            //clientSocket.Connect("127.0.0.1", 8888);
-
-
         }
 
         private void AuthorizationWindow_Load(object sender, EventArgs e)
         {
-
+            //clientSocket.Connect("127.0.0.1", 8888);
+            msg("Client Socket Program - Server Connected ...");
         }
 
         //надпись "Введите пароль для использования". ХЗ почему оно с пометкой КЛИК создалось
@@ -82,44 +78,21 @@ namespace Client
         {
             MessageData md = new MessageData();
             md.M_OperationType = "Authorization";
-            md.M_login = "123";
-            md.M_password = "123";
+            md.M_login = login_textBox.Text;
+            md.M_password = PasswordInput_textBox.Text;
 
             //_bFormatter.Serialize(stream, md);
 
 
             String userLogin = login_textBox.Text;
-            String userPassword = PasswordInput_textBox.Text;
+            String userPassword = PasswordInput_textBox.Text;        
 
-            //userName = Console.ReadLine();
+            serverStream = clientSocket.GetStream();
 
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(serverStream, md);
 
-
-            //client = new TcpClient();
-            //try
-            //{
-            //    client.Connect(host, port); //подключение клиента
-            //    stream = client.GetStream(); // получаем поток
-
-            //    string message = userName;
-            //    byte[] data = Encoding.Unicode.GetBytes(message);
-            //    stream.Write(data, 0, data.Length);
-
-            //    // запускаем новый поток для получения данных
-            //    Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
-            //    receiveThread.Start(); //старт потока
-            //    //Console.WriteLine("Добро пожаловать, {0}", userName);
-            //    SendMessage();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
-            //finally
-            //{
-            //    Disconnect();
-            //}
-
+            string answer = (string)formatter.Deserialize(serverStream);
 
 
 
@@ -130,27 +103,11 @@ namespace Client
             */
             if (PasswordInput_textBox.Text != "" && PasswordInput_textBox.Text != "Введите пароль" && PasswordInput_textBox.Text != "")
             {
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
-
-                command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
-                command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
-
-                adapter.SelectCommand = command;
-                adapter.Fill(table);
-
-
-
-
                 //если пароль введён правильно, это окно больше не нужно. поэтому оно закроется и откроет основное
-                if (table.Rows.Count > 0)
+                if (answer == "yes")
                 {
-                    ////MessageBox.Show("HURRAY!");
-
-                    //this.Hide();// убираем окно регистрации
-
-                    //MainWindow mainWindow = new MainWindow();
-                    //mainWindow.Show();// открываем основное окно
-                    table = new DataTable();
+   
+                    //table = new DataTable();
 
                     MessageBox.Show("It works!!");
                 }
@@ -159,6 +116,7 @@ namespace Client
                     MessageBox.Show("Неверный пароль.");
                 }
             }
+            //serverStream.Close();
         }
 
 
@@ -210,58 +168,36 @@ namespace Client
 
 
 
-
-        static void SendMessage()
+        public void msg(string mesg)
         {
-            //Console.WriteLine("Введите сообщение: ");
-
-            while (true)
-            {
-                string message = Console.ReadLine();
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                stream.Write(data, 0, data.Length);
-            }
-        }
-        // получение сообщений
-        static void ReceiveMessage()
-        {
-            while (true)
-            {
-                try
-                {
-                    byte[] data = new byte[64]; // буфер для получаемых данных
-                    StringBuilder builder = new StringBuilder();
-                    int bytes = 0;
-                    do
-                    {
-                        bytes = stream.Read(data, 0, data.Length);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                    }
-                    while (stream.DataAvailable);
-
-                    string message = builder.ToString();
-                    Console.WriteLine(message);//вывод сообщения
-                }
-                catch
-                {
-                    Console.WriteLine("Подключение прервано!"); //соединение было прервано
-                    Console.ReadLine();
-                    Disconnect();
-                }
-            }
+            MessageBox.Show(mesg);
         }
 
-        static void Disconnect()
+        private void AuthorizationWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (stream != null)
-                stream.Close();//отключение потока
-            if (client != null)
-                client.Close();//отключение клиента
-            Environment.Exit(0); //завершение процесса
+            //serverStream.Close();
+            //clientSocket.Close();
         }
 
+        private void AuthorizationWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //serverStream.Close();
+            //clientSocket.Close();
+        }
 
+        //public BinaryFormatter getSerializedMessage (NetworkStream stream, BinaryFormatter BF, MessageData MD)
+        //{
+        //    //BinaryFormatter binFmr = new BinaryFormatter();
+        //    //MessageData messageData = new MessageData();
+        //    int buf;
 
+        //    BF.Serialize(stream, MD);
+        //    return BF;
 
+        //    //binFmr.Serialize(stream, this.messageData);
+        //}
+
+        //networkStream.Close();
+        //clientSocket.Close();
     }
 }

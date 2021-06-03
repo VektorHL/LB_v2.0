@@ -16,19 +16,15 @@ using Objects;
 using System.Threading;
 using System.Security.Permissions;
 using Client;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace Server
 {
     class ServerProgram
     {
-        //static ServerObject server; // сервер
-        //static Thread listenThread; // потока для прослушивания
-
         static void Main(string[] args)
         {
-
-            //serverDB dB = new serverDB();
-
             DB db = new DB();
 
             DataTable dataTable = new DataTable();
@@ -37,61 +33,88 @@ namespace Server
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            //try
-            //{
-            //    server = new ServerObject();
-            //    listenThread = new Thread(new ThreadStart(server.Listen));
-            //    listenThread.Start(); //старт потока
-            //}
-            //catch (Exception ex)
-            //{
-            //    server.Disconnect();
-            //    Console.WriteLine(ex.Message);
-            //}
+            
+            TcpListener server = new TcpListener(8888);
+            server.Start();
+            Console.WriteLine("Сервер запущен. Джём клиента");
+            TcpClient client = server.AcceptTcpClient();
+            NetworkStream strm = client.GetStream();
+            Console.WriteLine("Клиент подключился");
 
-            Console.WriteLine("asd");
-
-            //MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
-
-            MySqlCommand command = new MySqlCommand("SELECT id FROM `users` ", db.getConnection());
-
-            //command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
-            //command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
-
-
-            adapter.SelectCommand = command;
-
-            Console.WriteLine("asd");
-            table = new DataTable();
-
-            adapter.Fill(table);
-
-            Console.WriteLine("asd");
-
-            if (table.Rows.Count > 0)
+            while (true)
             {
-                ////MessageBox.Show("HURRAY!");
+                if(!client.Connected)
+                {
+                    Console.WriteLine("Соединение с клиентом потеряно. Перезапускаю сервак и ожидаю клиента");
+                    client.Close();
+                    server.Stop();
 
-                //this.Hide();// убираем окно регистрации
+                    server = new TcpListener(8888);
+                    server.Start();
+                    client = server.AcceptTcpClient();
+                    strm = client.GetStream();
+                    Console.WriteLine("Клиент подключился");
+                }
 
-                //MainWindow mainWindow = new MainWindow();
-                //mainWindow.Show();// открываем основное окно
+                try
+                {
+                    strm = client.GetStream();
+                    IFormatter formatter = new BinaryFormatter();
+                    MessageData message = (MessageData)formatter.Deserialize(strm);
+                    string login = message.M_login;
 
-                Console.WriteLine("ты не пидор");
+                    switch (message.M_OperationType) 
+                    {
+                        case "Authorization":
+                            Console.WriteLine("oper type - Authorization");
+
+                            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
+
+                            cmd.Parameters.Add("@ln", MySqlDbType.VarChar).Value = message.M_login;
+                            cmd.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = message.M_password;
+
+                            adapter.SelectCommand = cmd;
+                            table = new DataTable();
+                            adapter.Fill(table);
+
+                            if (table.Rows.Count > 0)
+                            {
+                                table = new DataTable();
+
+                                string answer = "yes";
+                                formatter.Serialize(strm, answer);
+
+                                Console.WriteLine("Авторизация удалась");
+                            }
+                            else
+                            {
+                                table = new DataTable();
+                                string answer = "no";
+                                formatter.Serialize(strm, answer);
+
+                                Console.WriteLine("Неверный логин или пароль");
+                            }
+                            break;
+                        
+                        case "asd":
+                            Console.WriteLine("login asd");
+                            break;
+
+                        case "qwe":
+
+                            break;
+
+                        
+                    }
+                }
+                catch(Exception ex) 
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+
             }
-            else
-            {
-                Console.WriteLine("assd");
-            }
-
         }
     }
 
-
-
-    
+ 
 }
-
-
-//System.IO.FileNotFoundException: 'Could not load file or assembly 'System.Security.Permissions, Version = 0.0.0.0, Culture = neutral, PublicKeyToken = cc7b13ffcd2ddd51'. 
-//    Не удается найти указанный файл.'

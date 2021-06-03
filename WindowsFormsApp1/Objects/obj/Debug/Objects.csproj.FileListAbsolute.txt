@@ -1,6 +1,5 @@
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\bin\Debug\Objects.dll
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\bin\Debug\Objects.pdb
-S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.csprojAssemblyReference.cache
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.CoreCompileInputs.cache
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.dll
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.pdb
@@ -10,3 +9,4 @@ C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects
 C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.CoreCompileInputs.cache
 C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.dll
 C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.pdb
+S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.AssemblyReference.cache
