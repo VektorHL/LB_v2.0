@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         public string M_login { get; set; }
         public string M_password { get; set; }
         public string M_memberName { get; set; }
+        public string M_roomName { get; set; }
         public List<string[]> data { get; set; }  /* = new List<string[]>()*/
     }
 }

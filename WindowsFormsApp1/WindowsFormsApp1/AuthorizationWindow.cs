@@ -28,8 +28,6 @@ namespace Client
 
         MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-
-
         //static string userName;
         private const string host = "127.0.0.1";
         private const int port = 8888;
@@ -57,7 +55,7 @@ namespace Client
         private void AuthorizationWindow_Load(object sender, EventArgs e)
         {
             //clientSocket.Connect("127.0.0.1", 8888);
-            msg("Client Socket Program - Server Connected ...");
+            //msg("Client Socket Program - Server Connected ...");
         }
 
         //надпись "Введите пароль для использования". ХЗ почему оно с пометкой КЛИК создалось
@@ -81,11 +79,8 @@ namespace Client
             md.M_login = login_textBox.Text;
             md.M_password = PasswordInput_textBox.Text;
 
-            //_bFormatter.Serialize(stream, md);
-
-
-            String userLogin = login_textBox.Text;
-            String userPassword = PasswordInput_textBox.Text;        
+            //String userLogin = login_textBox.Text;
+            //String userPassword = PasswordInput_textBox.Text;        
 
             serverStream = clientSocket.GetStream();
 
@@ -106,13 +101,22 @@ namespace Client
                 //если пароль введён правильно, это окно больше не нужно. поэтому оно закроется и откроет основное
                 if (answer == "yes")
                 {
-                    this.Hide();
 
+                    
+                    serverStream.Close();
+                    //clientSocket.Client.Disconnect(false);
+                    //clientSocket.Dispose();
+                    //clientSocket.Client.Close();
+                    clientSocket.Close();
+
+                    
+                    this.Hide();
+                    
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     //table = new DataTable();
-
-                    MessageBox.Show("It works!!");
+                    //this.Close();
+                    //MessageBox.Show("It works!!");
                 }
                 else
                 {
@@ -178,7 +182,7 @@ namespace Client
 
         private void AuthorizationWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //serverStream.Close();
+            //clientSocket.GetStream().Close();
             //clientSocket.Close();
         }
 
@@ -186,6 +190,7 @@ namespace Client
         {
             //serverStream.Close();
             //clientSocket.Close();
+            Application.Exit();
         }
 
         //public BinaryFormatter getSerializedMessage (NetworkStream stream, BinaryFormatter BF, MessageData MD)
