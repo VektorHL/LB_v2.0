@@ -104,6 +104,7 @@
     <Compile Include="MemberWayWindow.Designer.cs">
       <DependentUpon>MemberWayWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageData.cs" />
     <Compile Include="OvertimeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Objects\Objects.csproj">
+      <Project>{6feff013-113c-4d62-aa46-e905975e9038}</Project>
+      <Name>Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

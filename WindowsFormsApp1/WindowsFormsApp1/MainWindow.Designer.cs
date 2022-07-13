@@ -42,11 +42,11 @@ namespace Client
             this.getMoves_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.getMoves_button = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.getMoves_names_comboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.getMoves_movesType_comboBox = new System.Windows.Forms.ComboBox();
-            this.getMoves_button = new System.Windows.Forms.Button();
             this.MainWindow_tableLayoutPanel.SuspendLayout();
             this.moves_tableLayoutPanel.SuspendLayout();
             this.inOut_panel.SuspendLayout();
@@ -214,6 +214,18 @@ namespace Client
             this.panel1.Size = new System.Drawing.Size(394, 122);
             this.panel1.TabIndex = 2;
             // 
+            // getMoves_button
+            // 
+            this.getMoves_button.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.getMoves_button.Location = new System.Drawing.Point(112, 20);
+            this.getMoves_button.Name = "getMoves_button";
+            this.getMoves_button.Size = new System.Drawing.Size(90, 25);
+            this.getMoves_button.TabIndex = 4;
+            this.getMoves_button.Text = "Получить";
+            this.getMoves_button.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.getMoves_button.UseVisualStyleBackColor = true;
+            this.getMoves_button.Click += new System.EventHandler(this.getMoves_button_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.getMoves_names_comboBox);
@@ -231,6 +243,7 @@ namespace Client
             this.getMoves_names_comboBox.Size = new System.Drawing.Size(234, 21);
             this.getMoves_names_comboBox.TabIndex = 1;
             this.getMoves_names_comboBox.TabStop = false;
+            this.getMoves_names_comboBox.SelectedIndexChanged += new System.EventHandler(this.getMoves_names_comboBox_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -255,18 +268,6 @@ namespace Client
             this.getMoves_movesType_comboBox.TabStop = false;
             this.getMoves_movesType_comboBox.SelectedIndexChanged += new System.EventHandler(this.getMoves_movesType_comboBox_SelectedIndexChanged);
             // 
-            // getMoves_button
-            // 
-            this.getMoves_button.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.getMoves_button.Location = new System.Drawing.Point(112, 20);
-            this.getMoves_button.Name = "getMoves_button";
-            this.getMoves_button.Size = new System.Drawing.Size(90, 25);
-            this.getMoves_button.TabIndex = 4;
-            this.getMoves_button.Text = "Получить";
-            this.getMoves_button.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.getMoves_button.UseVisualStyleBackColor = true;
-            this.getMoves_button.Click += new System.EventHandler(this.getMoves_button_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -278,6 +279,7 @@ namespace Client
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.MainWindow_tableLayoutPanel.ResumeLayout(false);
             this.moves_tableLayoutPanel.ResumeLayout(false);

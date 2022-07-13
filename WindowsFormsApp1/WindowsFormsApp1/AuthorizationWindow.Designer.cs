@@ -96,6 +96,8 @@ namespace Client
             this.Name = "AuthorizationWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LittleBrother. Авторизация";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuthorizationWindow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AuthorizationWindow_FormClosed);
             this.Load += new System.EventHandler(this.AuthorizationWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

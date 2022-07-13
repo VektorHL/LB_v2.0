@@ -1,8 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Net;
+using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
 namespace Client
 {
@@ -19,8 +25,21 @@ namespace Client
                                                                 "Пребывание сотрудника в зонах",
                                                                 "Переработка" };
 
+        private const string host = "127.0.0.1";
+        private const int port = 8888;
+
+        TcpClient clientSocket = new TcpClient(host, port);
+        //NetworkStream serverStream = clientSocket.GetStream();
+        MessageData md = new MessageData();
+
+        //public static TcpClient clientSocket = new TcpClient(host, port);
+        //NetworkStream serverStream = clientSocket.GetStream();
+
+
+
         public MainWindow()
         {
+
             InitializeComponent();
 
             getMoves_movesType_comboBox.Text = "Вид отчёта";
@@ -111,27 +130,79 @@ namespace Client
 
         private void getMoves_button_Click(object sender, EventArgs e)
         {
+            //clientSocket.Close();
+            //clientSocket = new TcpClient(host, port);
+            ////serverStream = clientSocket.GetStream();
+            //serverStream = clientSocket.GetStream();
+            //TcpClient clientSocket = new TcpClient(host, port);
+            //NetworkStream serverStream = clientSocket.GetStream();
+            //MessageData md = new MessageData();
+            NetworkStream serverStream = clientSocket.GetStream();
+
             switch (getMoves_movesType_comboBox.Text)
             {
+
+                //###################################################################################################
                 case "Маршрут сотрудника":
 
-                    MemberWayWindow memWayWindow = new MemberWayWindow(getMoves_names_comboBox.Text/*, getMoves_rooms_comboBox.Text*/);
+                    //serverStream = clientSocket.GetStream();
+
+                    md = new MessageData();
+                    md.M_OperationType = "Get Memb Way";
+                    md.M_memberName = getMoves_names_comboBox.Text;
+
+                    IFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(serverStream, md);
+
+                    md.data = (List<string[]>)formatter.Deserialize(serverStream);
+
+                    MemberWayWindow memWayWindow = new MemberWayWindow(md.data/*, getMoves_rooms_comboBox.Text*/);
                     memWayWindow.Show();
 
+                    //serverStream.Close();
+                    //clientSocket.Close();
+
                     break;
+
+                //###################################################################################################
                 case "Пребывание сотрудника в зонах":
 
-                    RoomStatWindow roomStatWindow = new RoomStatWindow(getMoves_names_comboBox.Text/*, getMoves_rooms_comboBox.Text*/);
+                    md = new MessageData();
+                    md.M_OperationType = "Get Room Stat";
+                    md.M_memberName = getMoves_names_comboBox.Text;
+
+                    formatter = new BinaryFormatter();
+                    formatter.Serialize(serverStream, md);
+
+                    md.data = (List<string[]>)formatter.Deserialize(serverStream);
+
+                    RoomStatWindow roomStatWindow = new RoomStatWindow(md.data/*, getMoves_rooms_comboBox.Text*/);
                     roomStatWindow.Show();
 
                     break;
+
+                //###################################################################################################
                 case "Переработка":
 
-                    OvertimeWindow overtimeWindow = new OvertimeWindow(getMoves_names_comboBox.Text/*, getMoves_rooms_comboBox.Text*/);
+                    //NetworkStream serverStream = clientSocket.GetStream();
+
+                    md = new MessageData();
+                    md.M_OperationType = "Get Overtime Stat";
+                    md.M_memberName = getMoves_names_comboBox.Text;
+
+                    formatter = new BinaryFormatter();
+                    formatter.Serialize(serverStream, md);
+
+                    md.data = (List<string[]>)formatter.Deserialize(serverStream);
+
+                    OvertimeWindow overtimeWindow = new OvertimeWindow(md.data/*, getMoves_rooms_comboBox.Text*/);
                     overtimeWindow.Show();
 
                     break;
             }
+
+            //serverStream.Close();
+            //clientSocket.Close();
         }
 
         private void getMoves_rooms_comboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -176,6 +247,16 @@ namespace Client
             finally { }
 
             db.closeConnection();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void getMoves_names_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

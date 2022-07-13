@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient; //для работы клиента с сервером
 using Npgsql;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using Objects;
+using System.Threading;
+using System.IO;
 
 namespace Client
 {
@@ -19,6 +27,13 @@ namespace Client
         DataTable table = new DataTable();
 
         MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+        //static string userName;
+        private const string host = "127.0.0.1";
+        private const int port = 8888;
+
+        public static TcpClient clientSocket = new TcpClient(host, port);
+        NetworkStream serverStream = clientSocket.GetStream();
 
         //конструктор для окна авторизации
         public AuthorizationWindow()
@@ -34,11 +49,13 @@ namespace Client
 
             //скрывает символы пароля
             this.PasswordInput_textBox.UseSystemPasswordChar = true;
+
         }
 
         private void AuthorizationWindow_Load(object sender, EventArgs e)
         {
-
+            //clientSocket.Connect("127.0.0.1", 8888);
+            //msg("Client Socket Program - Server Connected ...");
         }
 
         //надпись "Введите пароль для использования". ХЗ почему оно с пометкой КЛИК создалось
@@ -57,45 +74,56 @@ namespace Client
         //кнопка "ОК" для отправки пароля на проверку. Действие после клика на неё
         private void Password_OK_Botton_Click(object sender, EventArgs e)
         {
-            String userPassword = PasswordInput_textBox.Text;
-            String userLogin = login_textBox.Text;
+            MessageData md = new MessageData();
+            md.M_OperationType = "Authorization";
+            md.M_login = login_textBox.Text;
+            md.M_password = PasswordInput_textBox.Text;
+
+            //String userLogin = login_textBox.Text;
+            //String userPassword = PasswordInput_textBox.Text;        
+
+            serverStream = clientSocket.GetStream();
+
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(serverStream, md);
+
+            string answer = (string)formatter.Deserialize(serverStream);
+
+
+
             /*
              * ничего не делает, если: 
              *      1)поле после попытки ввода пароля осталось пустым (мигающий курсор в нём, но оно пустое; будет красная надпись)
              *      2)попытки ввода пароля не было (есть серая надпись "Введите пароль", она только сразу после запуска программы такая)
             */
-            if (PasswordInput_textBox.Text != "" && PasswordInput_textBox.Text != "Введите пароль")
-            {          
-                //DB db = new DB();
-
-                //DataTable table = new DataTable();
-
-                //MySqlDataAdapter adapter = new MySqlDataAdapter();
-
-                MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @ln AND `password` = @pswd", db.getConnection());
-
-                command.Parameters.Add("@ln", MySqlDbType.VarChar).Value = userLogin;
-                command.Parameters.Add("@pswd", MySqlDbType.VarChar).Value = userPassword;
-
-                adapter.SelectCommand = command;
-                adapter.Fill(table);
-                
-                
+            if (PasswordInput_textBox.Text != "" && PasswordInput_textBox.Text != "Введите пароль" && PasswordInput_textBox.Text != "")
+            {
                 //если пароль введён правильно, это окно больше не нужно. поэтому оно закроется и откроет основное
-                if (table.Rows.Count > 0)
+                if (answer == "yes")
                 {
-                    //MessageBox.Show("HURRAY!");
 
-                    this.Hide();// убираем окно регистрации
+                    
+                    serverStream.Close();
+                    //clientSocket.Client.Disconnect(false);
+                    //clientSocket.Dispose();
+                    //clientSocket.Client.Close();
+                    clientSocket.Close();
 
+                    
+                    this.Hide();
+                    
                     MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();// открываем основное окно                  
+                    mainWindow.Show();
+                    //table = new DataTable();
+                    //this.Close();
+                    //MessageBox.Show("It works!!");
                 }
                 else
                 {
                     MessageBox.Show("Неверный пароль.");
                 }
             }
+            //serverStream.Close();
         }
 
 
@@ -144,5 +172,40 @@ namespace Client
                 login_textBox.ForeColor = Color.Red;
             }
         }
+
+
+
+        public void msg(string mesg)
+        {
+            MessageBox.Show(mesg);
+        }
+
+        private void AuthorizationWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //clientSocket.GetStream().Close();
+            //clientSocket.Close();
+        }
+
+        private void AuthorizationWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //serverStream.Close();
+            //clientSocket.Close();
+            Application.Exit();
+        }
+
+        //public BinaryFormatter getSerializedMessage (NetworkStream stream, BinaryFormatter BF, MessageData MD)
+        //{
+        //    //BinaryFormatter binFmr = new BinaryFormatter();
+        //    //MessageData messageData = new MessageData();
+        //    int buf;
+
+        //    BF.Serialize(stream, MD);
+        //    return BF;
+
+        //    //binFmr.Serialize(stream, this.messageData);
+        //}
+
+        //networkStream.Close();
+        //clientSocket.Close();
     }
 }
