@@ -10,3 +10,9 @@ C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects
 C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.dll
 C:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.pdb
 S:\MyPrograms\GitHub Projects\LB_v2.0\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.AssemblyReference.cache
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\bin\Debug\Objects.dll
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\bin\Debug\Objects.pdb
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.AssemblyReference.cache
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Debug\Objects.csproj.CoreCompileInputs.cache
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Debug\Objects.dll
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Debug\Objects.pdb

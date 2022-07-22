@@ -1,0 +1,5 @@
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\bin\Release\Objects.dll
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\bin\Release\Objects.pdb
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Release\Objects.csproj.CoreCompileInputs.cache
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Release\Objects.dll
+C:\Users\Abrakadabra\YandexDisk-VektorHalfLife\University\University\VI_semester\Курсовая\На печать к курсовой\WindowsFormsApp1\Objects\obj\Release\Objects.pdb

@@ -54,7 +54,7 @@ namespace Client
 
         private void AuthorizationWindow_Load(object sender, EventArgs e)
         {
-            //clientSocket.Connect("127.0.0.1", 8888);
+            //clientSocket.Connect("127.0.0.1", 3306);
             //msg("Client Socket Program - Server Connected ...");
         }
 

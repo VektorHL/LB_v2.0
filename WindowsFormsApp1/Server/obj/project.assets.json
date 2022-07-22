@@ -648,26 +648,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\IVAN\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Abrakadabra\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\IVAN\\.nuget\\packages\\",
-      "outputPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Abrakadabra\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\IVAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Abrakadabra\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -681,11 +674,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj": {
-              "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\Objects\\Objects.csproj"
+            "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\Objects\\Objects.csproj": {
+              "projectPath": "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\Objects\\Objects.csproj"
             },
-            "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj": {
-              "projectPath": "S:\\MyPrograms\\GitHub Projects\\LB_v2.0\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj"
+            "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj": {
+              "projectPath": "C:\\Users\\Abrakadabra\\YandexDisk-VektorHalfLife\\University\\University\\VI_semester\\Курсовая\\На печать к курсовой\\WindowsFormsApp1\\WindowsFormsApp1\\Client.csproj"
             }
           }
         }
@@ -723,18 +716,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.14, 3.1.14]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300-preview.21258.4\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
       }
     }
   }
